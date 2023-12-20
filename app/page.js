@@ -1,95 +1,319 @@
-import Image from 'next/image'
-import styles from './page.module.css'
-
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
+    <main className="main">
+      <sction className="banner">
+        <div className="banner__description">
+          <h1 className="banner__title">
+            Портал инди-игр от&nbsp;студентов Яндекс Практикума
+          </h1>
+          <div className="banner__text-block">
+            <p className="banner__text">
+              Студенты курсов разрабатывают свои игры на Unity, здесь мы их
+              публикуем. Вы можете играть прямо на сайте. А если у вас есть
+              аккаунт пользователя — получаете возможность голосовать за игры.
+            </p>
+          </div>
+          <a href="#popular" className="button banner__link">
+            Смотреть игры
           </a>
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+        <img
+          src="/images/banner-illustration.jpg"
+          alt="Рука, утопленная в желтом фоне"
+          className="banner__image"
         />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
+      </sction>
+      <section className="list-section">
+        <h2 className="list-section__title" id="popular">
+          Популярное
+        </h2>
+        <ul className="cards-list">
+          <li className="cards-list__item">
+            <a href="/game-id.html" className="card-list__link">
+              <article className="card">
+                <img
+                  src="https://img.itch.zone/aW1nLzE0MDg0MTkzLnBuZw==/315x250%23c/o5Yk7V.png"
+                  alt=""
+                  className="card__image"
+                />
+                <div className="card__content-block">
+                  <h3 className="card__title">the Dismay</h3>
+                  <p className="card__description">
+                    Атмосферный саспенс с неочевидным геймплеем
+                  </p>
+                  <p className="card__author">
+                    Автор: <span className="card__accent">B.U.G.</span>
+                  </p>
+                  <p className="card__votes">
+                    Голосов на сайте: <span className="card__accent">20</span>
+                  </p>
+                </div>
+              </article>
+            </a>
+          </li>
+          <li className="cards-list__item">
+            <a href="/game-id.html" className="card-list__link">
+              <article className="card">
+                <img
+                  src="https://img.itch.zone/aW1nLzE0MDcyMjU4LmpwZw==/315x250%23c/joVZtb.jpg"
+                  alt=""
+                  className="card__image"
+                />
+                <div className="card__content-block">
+                  <h3 className="card__title">Nya Shooting</h3>
+                  <p className="card__description">Няшный шутер</p>
+                  <p className="card__author">
+                    Автор: <span className="card__accent">DonnFI</span>
+                  </p>
+                  <p className="card__votes">
+                    Голосов на сайте: <span className="card__accent">10</span>
+                  </p>
+                </div>
+              </article>
+            </a>
+          </li>
+          <li className="cards-list__item">
+            <a href="/game-id.html" className="card-list__link">
+              <article className="card">
+                <img
+                  src="https://img.itch.zone/aW1nLzE0MDg0MTkzLnBuZw==/315x250%23c/o5Yk7V.png"
+                  alt=""
+                  className="card__image"
+                />
+                <div className="card__content-block">
+                  <h3 className="card__title">the Dismay</h3>
+                  <p className="card__description">
+                    Атмосферный саспенс с неочевидным геймплеем
+                  </p>
+                  <p className="card__author">
+                    Автор: <span className="card__accent">B.U.G.</span>
+                  </p>
+                  <p className="card__votes">
+                    Голосов на сайте: <span className="card__accent">20</span>
+                  </p>
+                </div>
+              </article>
+            </a>
+          </li>
+          <li className="cards-list__item">
+            <a href="/game-id.html" className="card-list__link">
+              <article className="card">
+                <img
+                  src="https://img.itch.zone/aW1nLzE0MDcyMjU4LmpwZw==/315x250%23c/joVZtb.jpg"
+                  alt=""
+                  className="card__image"
+                />
+                <div className="card__content-block">
+                  <h3 className="card__title">Nya Shooting</h3>
+                  <p className="card__description">Няшный шутер</p>
+                  <p className="card__author">
+                    Автор: <span className="card__accent">DonnFI</span>
+                  </p>
+                  <p className="card__votes">
+                    Голосов на сайте: <span className="card__accent">10</span>
+                  </p>
+                </div>
+              </article>
+            </a>
+          </li>
+          <li className="cards-list__item">
+            <a href="/game-id.html" className="card-list__link">
+              <article className="card">
+                <img
+                  src="https://img.itch.zone/aW1nLzE0MDg0MTkzLnBuZw==/315x250%23c/o5Yk7V.png"
+                  alt=""
+                  className="card__image"
+                />
+                <div className="card__content-block">
+                  <h3 className="card__title">the Dismay</h3>
+                  <p className="card__description">
+                    Атмосферный саспенс с неочевидным геймплеем
+                  </p>
+                  <p className="card__author">
+                    Автор: <span className="card__accent">B.U.G.</span>
+                  </p>
+                  <p className="card__votes">
+                    Голосов на сайте: <span className="card__accent">20</span>
+                  </p>
+                </div>
+              </article>
+            </a>
+          </li>
+          <li className="cards-list__item">
+            <a href="/game-id.html" className="card-list__link">
+              <article className="card">
+                <img
+                  src="https://img.itch.zone/aW1nLzE0MDcyMjU4LmpwZw==/315x250%23c/joVZtb.jpg"
+                  alt=""
+                  className="card__image"
+                />
+                <div className="card__content-block">
+                  <h3 className="card__title">Nya Shooting</h3>
+                  <p className="card__description">Няшный шутер</p>
+                  <p className="card__author">
+                    Автор: <span className="card__accent">DonnFI</span>
+                  </p>
+                  <p className="card__votes">
+                    Голосов на сайте: <span className="card__accent">10</span>
+                  </p>
+                </div>
+              </article>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section className="list-section">
+        <h2 className="list-section__title">Новинки</h2>
+        <ul className="cards-list">
+          <li className="cards-list__item">
+            <a href="/game-id.html" className="card-list__link">
+              <article className="card">
+                <img
+                  src="https://img.itch.zone/aW1nLzE0MDg0MTkzLnBuZw==/315x250%23c/o5Yk7V.png"
+                  alt=""
+                  className="card__image"
+                />
+                <div className="card__content-block">
+                  <h3 className="card__title">the Dismay</h3>
+                  <p className="card__description">
+                    Атмосферный саспенс с неочевидным геймплеем
+                  </p>
+                  <p className="card__author">
+                    Автор: <span className="card__accent">B.U.G.</span>
+                  </p>
+                  <p className="card__votes">
+                    Голосов на сайте: <span className="card__accent">20</span>
+                  </p>
+                </div>
+              </article>
+            </a>
+          </li>
+          <li className="cards-list__item">
+            <a href="/game-id.html" className="card-list__link">
+              <article className="card">
+                <img
+                  src="https://img.itch.zone/aW1nLzE0MDcyMjU4LmpwZw==/315x250%23c/joVZtb.jpg"
+                  alt=""
+                  className="card__image"
+                />
+                <div className="card__content-block">
+                  <h3 className="card__title">Nya Shooting</h3>
+                  <p className="card__description">Няшный шутер</p>
+                  <p className="card__author">
+                    Автор: <span className="card__accent">DonnFI</span>
+                  </p>
+                  <p className="card__votes">
+                    Голосов на сайте: <span className="card__accent">10</span>
+                  </p>
+                </div>
+              </article>
+            </a>
+          </li>
+          <li className="cards-list__item">
+            <a href="/game-id.html" className="card-list__link">
+              <article className="card">
+                <img
+                  src="https://img.itch.zone/aW1nLzE0MDg0MTkzLnBuZw==/315x250%23c/o5Yk7V.png"
+                  alt=""
+                  className="card__image"
+                />
+                <div className="card__content-block">
+                  <h3 className="card__title">the Dismay</h3>
+                  <p className="card__description">
+                    Атмосферный саспенс с неочевидным геймплеем
+                  </p>
+                  <p className="card__author">
+                    Автор: <span className="card__accent">B.U.G.</span>
+                  </p>
+                  <p className="card__votes">
+                    Голосов на сайте: <span className="card__accent">20</span>
+                  </p>
+                </div>
+              </article>
+            </a>
+          </li>
+          <li className="cards-list__item">
+            <a href="/game-id.html" className="card-list__link">
+              <article className="card">
+                <img
+                  src="https://img.itch.zone/aW1nLzE0MDcyMjU4LmpwZw==/315x250%23c/joVZtb.jpg"
+                  alt=""
+                  className="card__image"
+                />
+                <div className="card__content-block">
+                  <h3 className="card__title">Nya Shooting</h3>
+                  <p className="card__description">Няшный шутер</p>
+                  <p className="card__author">
+                    Автор: <span className="card__accent">DonnFI</span>
+                  </p>
+                  <p className="card__votes">
+                    Голосов на сайте: <span className="card__accent">10</span>
+                  </p>
+                </div>
+              </article>
+            </a>
+          </li>
+          <li className="cards-list__item">
+            <a href="/game-id.html" className="card-list__link">
+              <article className="card">
+                <img
+                  src="https://img.itch.zone/aW1nLzE0MDg0MTkzLnBuZw==/315x250%23c/o5Yk7V.png"
+                  alt=""
+                  className="card__image"
+                />
+                <div className="card__content-block">
+                  <h3 className="card__title">the Dismay</h3>
+                  <p className="card__description">
+                    Атмосферный саспенс с неочевидным геймплеем
+                  </p>
+                  <p className="card__author">
+                    Автор: <span className="card__accent">B.U.G.</span>
+                  </p>
+                  <p className="card__votes">
+                    Голосов на сайте: <span className="card__accent">20</span>
+                  </p>
+                </div>
+              </article>
+            </a>
+          </li>
+          <li className="cards-list__item">
+            <a href="/game-id.html" className="card-list__link">
+              <article className="card">
+                <img
+                  src="https://img.itch.zone/aW1nLzE0MDcyMjU4LmpwZw==/315x250%23c/joVZtb.jpg"
+                  alt=""
+                  className="card__image"
+                />
+                <div className="card__content-block">
+                  <h3 className="card__title">Nya Shooting</h3>
+                  <p className="card__description">Няшный шутер</p>
+                  <p className="card__author">
+                    Автор: <span className="card__accent">DonnFI</span>
+                  </p>
+                  <p className="card__votes">
+                    Голосов на сайте: <span className="card__accent">10</span>
+                  </p>
+                </div>
+              </article>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section className="promo">
+        <div className="promo__description-block">
+          <h2 className="promo__title">Твой промо-код</h2>
+          <p className="promo__description">
+            Скидка на все курсы Яндекс Практикума для пользователей нашего
+            сайта!
           </p>
-        </a>
-      </div>
+          <button className="button promo__button">Получить код</button>
+        </div>
+        <img
+          src="/images/promo-illustration.svg"
+          alt="Собака"
+          className="promo__image"
+        />
+      </section>
     </main>
-  )
+  );
 }
