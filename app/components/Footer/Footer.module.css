@@ -34,11 +34,17 @@
   justify-content: center;
   align-items: center;
   padding: 30px;
+  border: 0;
   border-right: 4px solid white;
   color: white;
   height: 100%;
   border-top: 0;
   border-bottom: 0;
+}
+
+.footer .social-list__link:hover {
+  background-color: #FFFF00;
+  color: black;
 }
 
 @media (width <= 1440px) {
