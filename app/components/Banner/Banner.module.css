@@ -1,5 +1,5 @@
 .banner {
-  padding: 40px 40px 112px;
+  padding: 112px 40px 112px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
