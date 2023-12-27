@@ -38,7 +38,7 @@ src="https://code.s3.yandex.net/teens/pindie-games/go-away/cover.jpg"           
               className={Styles["card__image"]}
             />
             <div className={Styles["card__content-block"]}>
-              <h3 className={Styles["card__title"]}>G.U.N.N.E.R</h3>
+              <h3 className={Styles["card__title"]}>G.U.N.N.E.R.</h3>
               <p className={Styles["card__description"]}> Ваша задача — отбиваться от бесконечных волн врагов, которых
                     будет становится все больше и больше, как долго вы сможете
                     продержаться?</p>
