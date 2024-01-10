@@ -44,6 +44,15 @@
   color: #2400FF;
 }
 
+.promo-code {
+  color: yellow;
+}
+
+.promo__button:has(.promo-code):hover {
+  background-color: transparent;
+  cursor: default;
+}
+
 @media (width <= 1440px) {
   .promo {
     padding: 25px 120px 40px;
