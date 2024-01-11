@@ -15,7 +15,7 @@ export const data = [
       },
       {
         id: 2,
-        name: "Pixel Game",
+        name: "pixel",
       },
       {
         id: 3,
@@ -56,11 +56,11 @@ export const data = [
       },
       {
         id: 2,
-        name: "Pixel Game",
+        name: "pixel",
       },
       {
         id: 4,
-        name: "Shooter",
+        name: "shooter",
       },
     ],
     users: [
@@ -97,7 +97,7 @@ export const data = [
       },
       {
         id: 4,
-        name: "Shooter",
+        name: "shooter",
       },
       {
         id: 5,
@@ -137,7 +137,7 @@ export const data = [
       },
       {
         id: 6,
-        name: "Runner",
+        name: "runner",
       },
     ],
     users: [
@@ -181,7 +181,7 @@ export const data = [
       },
       {
         id: 4,
-        name: "Shooter",
+        name: "shooter",
       },
     ],
     users: [
@@ -218,7 +218,7 @@ export const data = [
       },
       {
         id: 5,
-        name: "Shooter",
+        name: "shooter",
       },
     ],
     users: [
