@@ -5,3 +5,7 @@ export const getGamesByCategory = (caregory) => {
     return game.category.find((item) => item.name === caregory);
   });
 };
+
+export const getGameById = (id) => {
+  return data.find((game) => game.id === Number(id));
+}
