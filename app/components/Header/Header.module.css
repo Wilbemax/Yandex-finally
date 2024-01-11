@@ -41,7 +41,7 @@
 }
 
 .menu__link {
-  font-family: 'Rubic One', sans-serif;
+  font-family: "Rubic One", sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,11 +50,17 @@
   font-size: 30px;
   transition: background-color 0.3s ease-in-out;
   width: 100%;
-  box-shadow: 4px 4px 0 black, -4px -4px 0 black, -4px 4px 0 black, 4px -4px 0 black;
+  box-shadow: 4px 4px 0 black, -4px -4px 0 black, -4px 4px 0 black,
+    4px -4px 0 black;
 }
 
 .menu__link:hover {
-  background-color: #FFFF00;
+  background-color: #ffff00;
+}
+
+.menu__link_active {
+  background-color: #ffff00;
+  pointer-events: none;
 }
 
 .auth {
@@ -63,7 +69,7 @@
 
 .auth__button {
   font-size: 30px;
-  font-family: 'Rubic One', sans-serif;
+  font-family: "Rubic One", sans-serif;
   background-color: transparent;
   border: none;
   padding: 12px 20px 10px;
@@ -75,7 +81,7 @@
 }
 
 .auth__button:hover {
-  color: #FFFF00;
+  color: #ffff00;
 }
 
 @media (width <=1440px) {
@@ -84,7 +90,7 @@
     min-width: 140px;
     padding: 10px 0px;
   }
-  
+
   .menu__link {
     font-size: 20px;
   }
@@ -123,7 +129,6 @@
     width: 100%;
     padding: 18px 20px 10px;
   }
-
 }
 
 @media (width <= 650px) {
