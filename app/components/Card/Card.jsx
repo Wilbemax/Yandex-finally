@@ -1,9 +1,10 @@
+import Link from "next/link";
 import Styles from "./Card.module.css";
 
 export const Card = (props) => {
   return (
     <li className={Styles["cards-list__item"]}>
-      <a href={props.link} target="_blank" className={Styles["card-list__link"]}>
+      <Link href={`/games/${props.id}`} target="_blank" className={Styles["card-list__link"]}>
         <article className={Styles["card"]}>
           <img
             src={props.image}
@@ -24,7 +25,7 @@ export const Card = (props) => {
             </p>
           </div>
         </article>
-      </a>
+      </Link>
     </li>
   );
 };
