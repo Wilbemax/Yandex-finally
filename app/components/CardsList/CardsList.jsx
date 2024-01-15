@@ -10,10 +10,13 @@ export const CardsList = (props) => {
       <ul className={Styles["cards-list"]}>
         {props.data.map((item) => {
           return (
-            <Card
-              key={item.id}
-              {...item}
-            />
+            <li className={Styles["cards-list__item"]} key={item.id}>
+              <a href={item.link} target="_blank" className={Styles["card-list__link"]}>
+                <Card
+                  {...item}
+                />
+              </a>
+            </li>
           );
         })}
       </ul>
