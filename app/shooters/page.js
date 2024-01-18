@@ -4,7 +4,7 @@ import { CardsList } from "../components/CardsList/CardsList";
 export default function New() {
   const shooterGames = getGamesByCategory("shooter");
   return (
-    <main className="main">
+    <main className="main-inner">
       <CardsList id="shooter" title="Шутеры" data={shooterGames} />
     </main>
   );

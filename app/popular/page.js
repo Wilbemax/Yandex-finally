@@ -4,7 +4,7 @@ import { CardsList } from "../components/CardsList/CardsList";
 export default function New() {
   const popularGames = getGamesByCategory("popular");
   return (
-    <main className="main">
+    <main className="main-inner">
       <CardsList id="popular" title="Популярные" data={popularGames} />
     </main>
   );

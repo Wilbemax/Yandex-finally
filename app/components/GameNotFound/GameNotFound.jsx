@@ -1,9 +1,11 @@
 import Styles from './GameNotFound.module.css';
+import {NotFoundImage} from './not-found.jsx';
 
 export const GameNotFound = () => {
   return (
     <div className={Styles["not-found"]}>
-      <h2 className={Styles["not-found__title"]}>Game not found</h2>
+      <NotFoundImage />
+      <h2 className={Styles["not-found__text"]}>Такой игры не существует :(</h2>
     </div>
   )
 };
