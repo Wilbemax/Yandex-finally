@@ -18,6 +18,16 @@ export const normalizeData = (data) => {
     });
 };
 
+export const getNormalizedGameDataById = async (url, id) => {
+  const data = await getData(`${url}/${id}`);
+  return normalizeDataObject(data);
+};
+
+export const getNormalizedGamesDataByCategory = async (url, category) => {
+  const data = await getData(`${url}?categories.name=${category}`);
+  return normalizeData(data);
+};
+
 export const getNormalizedData = async (url) => {
     const data = await getData(url);
     return normalizeData(data);

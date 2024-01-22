@@ -1,8 +1,8 @@
 'use client';
 import { endpoints } from "../../api/config";
-import { getNormalizedData } from "../../api/api-utils";
-import { getGameById } from "@/app/data/data-utils"
+import { getNormalizedGameDataById } from "../../api/api-utils";
 import { GameNotFound } from "@/app/components/GameNotFound/GameNotFound";
+import { Preloader } from "@/app/components/Preloader/Preloader";
 import { useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react';
 
@@ -10,12 +10,14 @@ import Styles from "./Game.module.css";
 
 export default function GamePage (props) {
   const [game, setGame] = useState(null)
+  const [preloaderVisible, setPreloaderVisible] = useState(true)
   const router = useRouter()
   useEffect(() => {
     async function fetchData() {
-      const games = await getNormalizedData(endpoints.games);
-      const game = getGameById(games, props.params.id)
-      setGame(game)
+      setPreloaderVisible(true)
+      const game = await getNormalizedGameDataById(endpoints.games, props.params.id);
+      game.error ? setGame(null) : setGame(game);
+      setPreloaderVisible(false)
     }
     fetchData()
   }, [])
@@ -42,7 +44,7 @@ export default function GamePage (props) {
             </section>
           </>
          
-        ) : (
+        ) : preloaderVisible ? <Preloader /> : (
           <GameNotFound />
         )
       }
