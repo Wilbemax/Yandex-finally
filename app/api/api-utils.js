@@ -4,13 +4,17 @@ export const getData = async (url) => {
     return data;
 };
 
+const normalizeDataObject = (obj) => {
+  return {
+    ...obj,
+    category: obj.categories,
+    users: obj.users_permissions_users,
+  };
+};
+
 export const normalizeData = (data) => {
     return data.map((item) => {
-      return {
-        ...item,
-        category: item.categories,
-        users: item.users_permissions_users,
-      };
+      return normalizeDataObject(item);
     });
 };
 
