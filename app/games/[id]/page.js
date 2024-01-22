@@ -1,13 +1,24 @@
 'use client';
+import { endpoints } from "../../api/config";
+import { getNormalizedData } from "../../api/api-utils";
 import { getGameById } from "@/app/data/data-utils"
 import { GameNotFound } from "@/app/components/GameNotFound/GameNotFound";
 import { useRouter } from 'next/navigation'
+import { useState, useEffect } from 'react';
 
 import Styles from "./Game.module.css";
 
 export default function GamePage (props) {
-  const game = getGameById(props.params.id)
+  const [game, setGame] = useState(null)
   const router = useRouter()
+  useEffect(() => {
+    async function fetchData() {
+      const games = await getNormalizedData(endpoints.games);
+      const game = getGameById(games, props.params.id)
+      setGame(game)
+    }
+    fetchData()
+  }, [])
   return (
     <main className="main">
       {

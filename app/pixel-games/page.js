@@ -1,8 +1,11 @@
+import { endpoints } from "@/app/api/config";
+import { getNormalizedData } from "@/app/api/api-utils";
 import { getGamesByCategory } from "../data/data-utils";
 import { CardsList } from "../components/CardsList/CardsList";
 
-export default function New() {
-  const pixelGames = getGamesByCategory("pixel");
+export default async function New() {
+  const games = await getNormalizedData(endpoints.games);
+  const pixelGames = getGamesByCategory(games, "pixel");
   return (
     <main className="main-inner">
       <CardsList id="pixel" title="Пиксельные" data={pixelGames} />
