@@ -1,7 +1,7 @@
 export const getData = async (url) => {
   try {
     const response = await fetch(url);
-    if(response.status !== 200) {
+    if (response.status !== 200) {
       throw new Error("Ошибка получения данных");
     }
     const data = await response.json();
@@ -24,9 +24,9 @@ const normalizeDataObject = (obj) => {
 };
 
 export const normalizeData = (data) => {
-    return data.map((item) => {
-      return normalizeDataObject(item);
-    });
+  return data.map((item) => {
+    return normalizeDataObject(item);
+  });
 };
 
 export const getNormalizedGameDataById = async (url, id) => {
@@ -37,7 +37,7 @@ export const getNormalizedGameDataById = async (url, id) => {
 export const getNormalizedGamesDataByCategory = async (url, category) => {
   try {
     const data = await getData(`${url}?categories.name=${category}`);
-    if(!data.length) {
+    if (!data.length) {
       throw new Error("Нет игр в категории");
     }
     return isResponseOk(data) ? normalizeData(data) : data;
@@ -47,9 +47,9 @@ export const getNormalizedGamesDataByCategory = async (url, category) => {
 };
 
 export const getNormalizedData = async (url) => {
-    const data = await getData(url);
-    return isResponseOk(data) ? normalizeData(data) : data;
-}
+  const data = await getData(url);
+  return isResponseOk(data) ? normalizeData(data) : data;
+};
 
 export const authorize = async (url, data) => {
   try {
@@ -58,7 +58,7 @@ export const authorize = async (url, data) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    if(response.status !== 200) {
+    if (response.status !== 200) {
       throw new Error("Ошибка авторизации");
     }
     const result = await response.json();
@@ -66,7 +66,7 @@ export const authorize = async (url, data) => {
   } catch (error) {
     return error;
   }
-}
+};
 
 export const setJWT = (jwt) => {
   document.cookie = `jwt=${jwt}`;
@@ -74,12 +74,12 @@ export const setJWT = (jwt) => {
 };
 
 export const getJWT = () => {
-  if(document.cookie === "") {
+  if (document.cookie === "") {
     return localStorage.getItem("jwt");
   }
   const jwt = document.cookie.split(";").find((item) => item.includes("jwt"));
   return jwt ? jwt.split("=")[1] : null;
-}
+};
 
 export const removeJWT = () => {
   document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -90,10 +90,34 @@ export const getMe = async (url, jwt) => {
   try {
     const response = await fetch(url, {
       method: "GET",
-      headers: { "Authorization": `Bearer ${jwt}` },
+      headers: { Authorization: `Bearer ${jwt}` },
     });
-    if(response.status !== 200) {
+    if (response.status !== 200) {
       throw new Error("Ошибка получения данных");
+    }
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const checkIfUserVoted = (game, userId) => {
+  return game.users_permissions_users.find((user) => user.id === userId);
+};
+
+export const vote = async (url, jwt, usersArray) => {
+  try {
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
+      body: JSON.stringify({ users_permissions_users: usersArray }),
+    });
+    if (response.status !== 200) {
+      throw new Error("Ошибка голосования");
     }
     const result = await response.json();
     return result;

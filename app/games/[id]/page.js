@@ -1,68 +1,123 @@
-'use client';
+"use client";
 import { endpoints } from "../../api/config";
-import { getNormalizedGameDataById, getJWT, removeJWT, getMe, isResponseOk } from "../../api/api-utils";
+import {
+  getNormalizedGameDataById,
+  getJWT,
+  removeJWT,
+  getMe,
+  isResponseOk,
+  checkIfUserVoted,
+  vote,
+} from "../../api/api-utils";
 import { GameNotFound } from "@/app/components/GameNotFound/GameNotFound";
 import { Preloader } from "@/app/components/Preloader/Preloader";
-import { useRouter } from 'next/navigation'
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 import Styles from "./Game.module.css";
 
-export default function GamePage (props) {
-  const [game, setGame] = useState(null)
-  const [preloaderVisible, setPreloaderVisible] = useState(true)
-  const [isAuthorized, setIsAuthorized] = useState(false)
-  const router = useRouter()
+export default function GamePage(props) {
+  const [game, setGame] = useState(null);
+  const [preloaderVisible, setPreloaderVisible] = useState(true);
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isVoted, setIsVoted] = useState(false);
+
   useEffect(() => {
     async function fetchData() {
-      setPreloaderVisible(true)
-      const game = await getNormalizedGameDataById(endpoints.games, props.params.id);
+      setPreloaderVisible(true);
+      const game = await getNormalizedGameDataById(
+        endpoints.games,
+        props.params.id
+      );
       isResponseOk(game) ? setGame(game) : setGame(null);
-      setPreloaderVisible(false)
+      setPreloaderVisible(false);
     }
-    fetchData()
-  }, [])
-  useEffect(() => {
+    fetchData();
+
     const jwt = getJWT();
     if (jwt) {
       getMe(endpoints.me, jwt).then((userData) => {
         if (isResponseOk(userData)) {
           setIsAuthorized(true);
+          setCurrentUser(userData);
         } else {
           setIsAuthorized(false);
           removeJWT();
         }
       });
     }
-  }, [])
+  }, []);
+  
+  useEffect(() => {
+    if (currentUser && game) {
+      setIsVoted(checkIfUserVoted(game, currentUser.id));
+    }
+  }, [currentUser]);
+
+  const handleVote = async () => {
+    const jwt = getJWT();
+    let usersIdArray = game.users.length
+      ? game.users.map((user) => user.id)
+      : [];
+    usersIdArray.push(currentUser.id);
+    const response = await vote(
+      `${endpoints.games}/${game.id}`,
+      jwt,
+      usersIdArray
+    );
+    if (isResponseOk(response)) {
+      setIsVoted(true);
+      setGame(() => {
+        return {
+          ...game,
+          users: [...game.users, currentUser],
+        };
+      });
+    }
+  };
+
   return (
     <main className="main">
-      {
-        game ? (
-          <>
-            <section className={Styles['game']}>
-              <iframe className={Styles['game__iframe']} src={game.link}></iframe>
-            </section>
-            <section className={Styles['about']}>
-              <h2 className={Styles['about__title']}>{game.title}</h2>
-              <div className={Styles['about__content']}>
-                <p className={Styles["about__description"]}>{game.description}</p>
-                <div className={Styles["about__author"]}>
-                  <p>Автор: <span className={Styles["about__accent"]}>{game.developer}</span></p>
-                </div>
+      {game ? (
+        <>
+          <section className={Styles["game"]}>
+            <iframe className={Styles["game__iframe"]} src={game.link}></iframe>
+          </section>
+          <section className={Styles["about"]}>
+            <h2 className={Styles["about__title"]}>{game.title}</h2>
+            <div className={Styles["about__content"]}>
+              <p className={Styles["about__description"]}>{game.description}</p>
+              <div className={Styles["about__author"]}>
+                <p>
+                  Автор:{" "}
+                  <span className={Styles["about__accent"]}>
+                    {game.developer}
+                  </span>
+                </p>
               </div>
-              <div className={Styles["about__vote"]}>
-                <p className={Styles["about__vote-amount"]}>За игру уже проголосовали: <span className={Styles["about__accent"]}>{game.users.length}</span></p>
-                <button disabled={!isAuthorized} className={`button ${Styles["about__vote-button"]}`}>Голосовать</button>
-              </div>
-            </section>
-          </>
-         
-        ) : preloaderVisible ? <Preloader /> : (
-          <GameNotFound />
-        )
-      }
-      
+            </div>
+            <div className={Styles["about__vote"]}>
+              <p className={Styles["about__vote-amount"]}>
+                За игру уже проголосовали:{" "}
+                <span className={Styles["about__accent"]}>
+                  {game.users.length}
+                </span>
+              </p>
+              <button
+                disabled={!isAuthorized || isVoted}
+                className={`button ${Styles["about__vote-button"]}`}
+                onClick={handleVote}
+              >
+                {isVoted ? "Голос учтён" : "Голосовать"}
+              </button>
+            </div>
+          </section>
+        </>
+      ) : preloaderVisible ? (
+        <Preloader />
+      ) : (
+        <GameNotFound />
+      )}
     </main>
-  )
+  );
 }
