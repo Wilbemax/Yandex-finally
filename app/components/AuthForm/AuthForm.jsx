@@ -15,20 +15,18 @@ export const AuthForm = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userData = await authorize(endpoints.auth, authData);
-    setUserData(userData);
+    if(isResponseOk(userData)) {
+      setUserData(userData);
+      setMessage({ status: "success", text: "Вы авторизовались!" });
+    } else {
+      setMessage({ status: "error", text: "Неверные почта или пароль" });
+    }
+    
   };
   useEffect(() => {
-    let timer;
-    if (userData) {
-      if (!isResponseOk(userData)) {
-        setMessage({ status: "error", text: "Неверные почта или пароль" });
-      } else {
-        setMessage({ status: "success", text: "Вы авторизовались!" });
-        timer = setTimeout(() => {
+    let timer = setTimeout(() => {
           props.close();
-        }, 3000);
-      }
-    }
+    }, 3000);
     return () => clearTimeout(timer);
   }, [userData]);
   return (
