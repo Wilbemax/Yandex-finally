@@ -1,6 +1,7 @@
 'use client';
 import { endpoints } from "../../api/config";
 import { getNormalizedGameDataById } from "../../api/api-utils";
+import { isResponseOk } from "../../api/api-utils";
 import { GameNotFound } from "@/app/components/GameNotFound/GameNotFound";
 import { Preloader } from "@/app/components/Preloader/Preloader";
 import { useRouter } from 'next/navigation'
@@ -16,7 +17,7 @@ export default function GamePage (props) {
     async function fetchData() {
       setPreloaderVisible(true)
       const game = await getNormalizedGameDataById(endpoints.games, props.params.id);
-      game.error ? setGame(null) : setGame(game);
+      isResponseOk(game) ? setGame(game) : setGame(null);
       setPreloaderVisible(false)
     }
     fetchData()
