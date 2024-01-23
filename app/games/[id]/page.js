@@ -1,7 +1,6 @@
 'use client';
 import { endpoints } from "../../api/config";
-import { getNormalizedGameDataById } from "../../api/api-utils";
-import { isResponseOk } from "../../api/api-utils";
+import { getNormalizedGameDataById, getJWT, removeJWT, getMe, isResponseOk } from "../../api/api-utils";
 import { GameNotFound } from "@/app/components/GameNotFound/GameNotFound";
 import { Preloader } from "@/app/components/Preloader/Preloader";
 import { useRouter } from 'next/navigation'
@@ -12,6 +11,7 @@ import Styles from "./Game.module.css";
 export default function GamePage (props) {
   const [game, setGame] = useState(null)
   const [preloaderVisible, setPreloaderVisible] = useState(true)
+  const [isAuthorized, setIsAuthorized] = useState(false)
   const router = useRouter()
   useEffect(() => {
     async function fetchData() {
@@ -21,6 +21,19 @@ export default function GamePage (props) {
       setPreloaderVisible(false)
     }
     fetchData()
+  }, [])
+  useEffect(() => {
+    const jwt = getJWT();
+    if (jwt) {
+      getMe(endpoints.me, jwt).then((userData) => {
+        if (isResponseOk(userData)) {
+          setIsAuthorized(true);
+        } else {
+          setIsAuthorized(false);
+          removeJWT();
+        }
+      });
+    }
   }, [])
   return (
     <main className="main">
@@ -40,7 +53,7 @@ export default function GamePage (props) {
               </div>
               <div className={Styles["about__vote"]}>
                 <p className={Styles["about__vote-amount"]}>За игру уже проголосовали: <span className={Styles["about__accent"]}>{game.users.length}</span></p>
-                <button onClick={()=>{router.push('/login')}} className={`button ${Styles["about__vote-button"]}`}>Голосовать</button>
+                <button disabled={!isAuthorized} className={`button ${Styles["about__vote-button"]}`}>Голосовать</button>
               </div>
             </section>
           </>

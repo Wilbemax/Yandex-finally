@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { endpoints } from "@/app/api/config";
 import { authorize } from "@/app/api/api-utils";
 import { isResponseOk } from "@/app/api/api-utils";
+import { setJWT } from "@/app/api/api-utils";
 
 export const AuthForm = (props) => {
   const [authData, setAuthData] = useState({ identifier: "", password: "" });
@@ -17,16 +18,20 @@ export const AuthForm = (props) => {
     const userData = await authorize(endpoints.auth, authData);
     if(isResponseOk(userData)) {
       setUserData(userData);
+      setJWT(userData.jwt);
+      props.setAuth(true);
       setMessage({ status: "success", text: "Вы авторизовались!" });
     } else {
       setMessage({ status: "error", text: "Неверные почта или пароль" });
     }
-    
   };
   useEffect(() => {
-    let timer = setTimeout(() => {
-          props.close();
-    }, 3000);
+    let timer; 
+    if(userData) {
+      timer = setTimeout(() => {
+        props.close();
+      }, 3000);
+    }
     return () => clearTimeout(timer);
   }, [userData]);
   return (
