@@ -3,6 +3,7 @@ import Styles from "./AuthForm.module.css";
 import { useState, useEffect } from "react";
 import { endpoints } from "@/app/api/config";
 import { authorize } from "@/app/api/api-utils";
+import { isResponseOk } from "@/app/api/api-utils";
 
 export const AuthForm = (props) => {
   const [authData, setAuthData] = useState({ identifier: "", password: "" });
@@ -19,7 +20,7 @@ export const AuthForm = (props) => {
   useEffect(() => {
     let timer;
     if (userData) {
-      if (userData.error) {
+      if (!isResponseOk(userData)) {
         setMessage({ status: "error", text: "Неверные почта или пароль" });
       } else {
         setMessage({ status: "success", text: "Вы авторизовались!" });

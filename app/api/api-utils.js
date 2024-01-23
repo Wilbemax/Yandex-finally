@@ -58,6 +58,9 @@ export const authorize = async (url, data) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
+    if(response.status !== 200) {
+      throw new Error("Ошибка авторизации");
+    }
     const result = await response.json();
     return result;
   } catch (error) {
