@@ -16,11 +16,13 @@ export const isResponseOk = (response) => {
 };
 
 const normalizeDataObject = (obj) => {
-  return {
+  const normalized = {
     ...obj,
     category: obj.categories,
     users: obj.users_permissions_users,
   };
+  delete normalized.users_permissions_users;
+  return normalized;
 };
 
 export const normalizeData = (data) => {
@@ -103,7 +105,7 @@ export const getMe = async (url, jwt) => {
 };
 
 export const checkIfUserVoted = (game, userId) => {
-  return game.users_permissions_users.find((user) => user.id === userId);
+  return game.users.find((user) => user.id === userId);
 };
 
 export const vote = async (url, jwt, usersArray) => {
