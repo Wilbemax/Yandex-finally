@@ -1,5 +1,7 @@
-import { Header } from './components/Header/Header';
-import { Footer } from './components/Footer/Footer';
+// import { Header } from './components/Header/Header';
+// import { Footer } from './components/Footer/Footer';
+
+import { App }from './App'
 
 import './globals.css'
 
@@ -12,9 +14,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ru">
       <body>
-        <Header />
+      <App>
         {children}
-        <Footer />
+      </App>
       </body>
     </html>
   )
