@@ -4,11 +4,10 @@ import { useState, useEffect } from "react";
 import { endpoints } from "@/app/api/config";
 import { authorize } from "@/app/api/api-utils";
 import { isResponseOk } from "@/app/api/api-utils";
-import { useContext } from "react";
-import { AuthContext } from "@/app/context/app-context";
+import { useStore } from "@/app/store/app-store";
 
 export const AuthForm = (props) => {
-  const authContext = useContext(AuthContext);
+  const authContext = useStore();
   const [authData, setAuthData] = useState({ identifier: "", password: "" });
   const [message, setMessage] = useState({ status: null, text: null });
   const handleInput = (e) => {
@@ -17,7 +16,7 @@ export const AuthForm = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userData = await authorize(endpoints.auth, authData);
-    if(isResponseOk(userData)) {
+    if (isResponseOk(userData)) {
       authContext.login(userData.user, userData.jwt);
       setMessage({ status: "success", text: "Вы авторизовались!" });
     } else {
@@ -25,10 +24,10 @@ export const AuthForm = (props) => {
     }
   };
   useEffect(() => {
-    let timer; 
-    if(authContext.user) {
+    let timer;
+    if (authContext.user) {
       timer = setTimeout(() => {
-        setMessage({ status: null, text: null});
+        setMessage({ status: null, text: null });
         props.close();
       }, 1000);
     }

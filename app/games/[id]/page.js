@@ -9,8 +9,7 @@ import {
 import { GameNotFound } from "@/app/components/GameNotFound/GameNotFound";
 import { Preloader } from "@/app/components/Preloader/Preloader";
 import { useState, useEffect } from "react";
-import { useContext } from "react";
-import { AuthContext } from "@/app/context/app-context";
+import { useStore } from "@/app/store/app-store";
 
 import Styles from "./Game.module.css";
 
@@ -18,7 +17,7 @@ export default function GamePage(props) {
   const [game, setGame] = useState(null);
   const [preloaderVisible, setPreloaderVisible] = useState(true);
   const [isVoted, setIsVoted] = useState(false);
-  const authContext = useContext(AuthContext);
+  const authContext = useStore();
 
   useEffect(() => {
     async function fetchData() {

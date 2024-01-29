@@ -10,13 +10,12 @@ import { AuthForm } from "../AuthForm/AuthForm";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { useContext } from "react";
-import { AuthContext } from "@/app/context/app-context";
+import { useStore } from "@/app/store/app-store";
 
 export const Header = () => {
   const [popupIsOpened, setPopupIsOpened] = useState(false);
 
-  const authContext = useContext(AuthContext);
+  const authContext = useStore();
 
   const openPopup = () => {
     setPopupIsOpened(true);
@@ -122,7 +121,6 @@ export const Header = () => {
               Войти
             </button>
           )}
-          
         </div>
       </nav>
       <Overlay isOpened={popupIsOpened} close={closePopup} />
