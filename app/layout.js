@@ -1,6 +1,3 @@
-// import { Header } from './components/Header/Header';
-// import { Footer } from './components/Footer/Footer';
-
 import { App }from './App'
 
 import './globals.css'
