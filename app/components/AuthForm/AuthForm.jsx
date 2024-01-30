@@ -63,7 +63,7 @@ export const AuthForm = (props) => {
       )}
       <div className={Styles["form__actions"]}>
         <button className={Styles["form__reset"]} type="reset">
-          Отмена
+          Очистить
         </button>
         <button className={Styles["form__submit"]} type="submit">
           Войти
