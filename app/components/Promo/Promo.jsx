@@ -33,7 +33,7 @@ export const Promo = () => {
           onClick={handleButtonClick}
         >
           {codeIsVisible ? (
-            <span className={Styles["promo-code"]}>YANDEXTEAM10</span>
+            <span className={Styles["promo-code"]}>WEBTEENS10</span>
           ) : (
             "Получить код"
           )}
