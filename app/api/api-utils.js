@@ -16,13 +16,11 @@ export const isResponseOk = (response) => {
 };
 
 const normalizeDataObject = (obj) => {
-  const normalized = {
+  return {
     ...obj,
     category: obj.categories,
     users: obj.users_permissions_users,
-  };
-  delete normalized.users_permissions_users;
-  return normalized;
+  }
 };
 
 export const normalizeData = (data) => {
