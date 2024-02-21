@@ -12,10 +12,10 @@ import Link from "next/link";
 export const CardsSlider = (props) => {
   useEffect(() => {
     const options = {
-      slidesPerView: 1,
       loop: false,
       spaceBetween: 10,
-      centerSlides: true,
+      allowTouchMove: true,
+      slidesPerView: 1,
       autoplay: {
         enabled: false,
       },
@@ -29,10 +29,9 @@ export const CardsSlider = (props) => {
         450: {
           loop: true,
           spaceBetween: 20,
+          allowTouchMove: false,
           slidesPerView: "auto",
-          centerSlides: true,
-          speed: 8000,
-          disableOnInteraction: false,
+          speed: 6500,
           autoplay: {
             enabled: true,
             delay: 0,
@@ -42,11 +41,9 @@ export const CardsSlider = (props) => {
           },
         },
       },
-
       modules: [Autoplay, Pagination],
     };
-
-    const swiper = new Swiper(".swiper", options);
+    new Swiper(".swiper", options);
   }, []);
   return (
     <div className={`swiper ${Styles["slider"]}`}>
