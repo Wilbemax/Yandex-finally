@@ -87,7 +87,7 @@ export const Header = () => {
                 pathname === "/runners" && Styles["menu__link_active"]
               }`}
             >
-              Ранеры
+              Раннеры
             </Link>
           </li>
           <li className={Styles["menu__item"]}>
