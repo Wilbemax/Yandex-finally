@@ -32,7 +32,7 @@ export default function GamePage(props) {
   }, []);
   
   useEffect(() => {
-    authContext.user && game ? setIsVoted(checkIfUserVoted(game, authContext.user.id)) : setIsVoted(false);
+    authContext.user && game ? setIsVoted(checkIfUserVoted(game, authContext.user._id)) : setIsVoted(false);
   }, [authContext.user, game]);
 
   const handleVote = async () => {
@@ -40,7 +40,9 @@ export default function GamePage(props) {
     let usersIdArray = game.users.length
       ? game.users.map((user) => user.id)
       : [];
-    usersIdArray.push(authContext.user.id);
+    
+    usersIdArray.push(authContext.user._id);
+   
     const response = await vote(
       `${endpoints.games}/${game.id}`,
       jwt,
@@ -56,7 +58,7 @@ export default function GamePage(props) {
       setIsVoted(true);
     }
   };
-
+console.log(game);
   return (
     <main className="main">
       {game ? (

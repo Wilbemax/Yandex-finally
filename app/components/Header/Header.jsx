@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Styles from "./Header.module.css";
 import { Overlay } from "../Overlay/Overlay";
@@ -16,7 +16,9 @@ export const Header = () => {
   const [popupIsOpened, setPopupIsOpened] = useState(false);
 
   const authContext = useStore();
-
+  useEffect(() => {
+    authContext.checkAuth()
+  }, []);
   const openPopup = () => {
     setPopupIsOpened(true);
   };
