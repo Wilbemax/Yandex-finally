@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://wbm.nomoredomainswork.ru/api'
+export const BASE_URL = 'https://wbm-back.nomoredomainswork.ru/api'
 
 export const endpoints = {
   games: `${BASE_URL}/games`,
